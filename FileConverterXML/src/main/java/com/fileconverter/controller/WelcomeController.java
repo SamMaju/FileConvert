@@ -24,7 +24,10 @@ public class WelcomeController {
 	
 	@Autowired
 	public FileConverterService fileconverterService;
-	
+	/*
+ 	* This method is the starting point of the appication where the url is exposed to the outer world
+ 	*/
+
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String showWelcomePage(ModelMap model) {
 		model.put("name", "Test");
@@ -36,11 +39,15 @@ public class WelcomeController {
 		return "xmlConvert";
 	}
 	
+	
 	@RequestMapping(value = "/convertToCSV", method = RequestMethod.GET)
 	public String convertTOCSV() {
 		return "csvConvert";
 	}
 	
+	/*
+ 	* This method is to call the internal service for XML convertion based on the user input
+ 	*/
 	@PostMapping("/xmlConvert")
 	public ModelAndView xmlConvert(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes){
 		if (file.isEmpty()) {
@@ -55,7 +62,9 @@ public class WelcomeController {
 		}
 		
 	}
-	
+	/*
+ 	* This method is to call the internal service for CSV convertion based on the user input
+ 	*/
 	@PostMapping("/csvConvert")
 	public ModelAndView csvConvert(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes){
 		if (file.isEmpty()) {
